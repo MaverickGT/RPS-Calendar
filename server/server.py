@@ -54,10 +54,11 @@ def get_item(id):
     return jsonify({'message': 'Item not found'}), 404
 
 #create app route to add item to database
-@app.route('/api/items', methods=['POST'])
+@app.route('/api/add', methods=['POST'])
 def add_item():
     database.add_item_to_database('2024-03-08', 'TypeC')
     return jsonify({'message': 'Item added'}), 201
 
+#TODO: Implement the remaining routes for updating and deleting items
 if __name__ == '__main__':
     app.run(debug=True, port=8081)
