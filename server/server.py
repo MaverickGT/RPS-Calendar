@@ -59,6 +59,18 @@ def add_item():
     database.add_item_to_database('2024-03-08', 'TypeC')
     return jsonify({'message': 'Item added'}), 201
 
+@app.route('/api/update/<int:id>', methods=['PUT'])
+def update_item(id):
+    database.update_item_in_database(id, '2024-03-09', 'TypeD')
+    return jsonify({'message': 'Item updated'}), 200
+
+#create app route to delete item from database
+@app.route('/api/delete/<int:id>', methods=['DELETE'])
+def delete_item(id):
+    #after implementing the database, call the delete_item_from_database function
+    database.delete_item_from_database(id)
+    return jsonify({'message': 'Item deleted'}), 200
+
 #TODO: Implement the remaining routes for updating and deleting items
 if __name__ == '__main__':
     app.run(debug=True, port=8081)

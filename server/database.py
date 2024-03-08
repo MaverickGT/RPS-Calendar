@@ -93,3 +93,40 @@ def get_item_from_database(id):
     return None
 #TODO: Implement the update_item_in_database and delete_item_from_database functions
         
+def update_item_in_database(id, item):
+    """Updates an item in the database by its id."""
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='your_database_name',
+            user='your_username',
+            password='your_password'
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("UPDATE items SET date = %s, type = %s WHERE id = %s", (*item, id))
+            connection.commit()
+            cursor.close()
+            connection.close()
+    except Error as e:
+        print(f"Error: {e}")
+
+def delete_item_from_database(id):
+    """Deletes an item from the database by its id."""
+    try:
+        connection = mysql.connector.connect(
+            host='localhost',
+            database='your_database_name',  
+            user='your_username', 
+            password='your_password'  
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            delete_query = """DELETE FROM your_table_name WHERE id = %s"""  # Change 'your_table_name' to your table's name
+            cursor.execute(delete_query, (id,))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("Record deleted successfully")
+    except Error as e:
+        print(f"Error: {e}")
