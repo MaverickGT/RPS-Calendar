@@ -78,6 +78,7 @@ def get_item(id):
     return jsonify({'message': 'Item not found'}), 404
 
 @app.route('/api/add', methods=['POST'])
+#admin
 def add_item():
     data = request.get_json()  # Get data from POST request
     name=data.get('name')
@@ -92,6 +93,7 @@ def add_item():
     return jsonify({'message': 'Item added'}), 201
 
 @app.route('/api/update/<int:id>', methods=['PUT'])
+#admin
 def update_item(id):
     event=get_item(id)
     data = request.get_json()  # Get data from PUT request
@@ -108,6 +110,7 @@ def update_item(id):
 
 
 @app.route('/api/delete/<int:id>', methods=['DELETE'])
+#admin
 def delete_item(id):
     #after implementing the database, call the delete_item_from_database function
     database.delete_item_from_database(id)
@@ -132,5 +135,6 @@ def get_legend():
     legend = database.get_legend_from_DB()
     return jsonify(legend)
 
+#update delete legend
 if __name__ == '__main__':
     app.run(debug=True, port=8081)

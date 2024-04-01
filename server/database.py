@@ -2,10 +2,10 @@ import mysql.connector
 from mysql.connector import Error
 from model import Create_Event, Event
 
-host_name='localhost',
-database_name='your_database_name',
-username='your_username',
-password_DB='your_password'
+host_name='78.128.76.186'
+database_name='event_calendar'
+username='alex'
+password_DB='SwyQcGYvKEXubkjXfCJEMLnRB'
 
 def connect_to_mariadb():
     """Connects to a MariaDB database and prints the database version."""
@@ -37,7 +37,7 @@ def add_item_to_database(event: Create_Event):
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("INSERT INTO items (name,start_date, end_date, type, description, picture) VALUES (%s, %s, %s, %s, %s)", (event.name,event.start_date,event.end_date, event.type, event.description, event.picture))
+            cursor.execute("INSERT INTO event_calendar.Event (name,start_date, end_date, type, description, picture) VALUES (%s, %s, %s, %s, %s, %s)", (event.name,event.start_date,event.end_date, event.type, event.description, event.picture))
             connection.commit()
             print(f"Item added to database with id {cursor.lastrowid}")
             cursor.close()
@@ -56,7 +56,7 @@ def get_items_from_database():
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM items")
+            cursor.execute("SELECT * FROM event_calendar.Event")
             rows = cursor.fetchall()
             items = []
             for row in rows:
@@ -88,7 +88,7 @@ def get_item_from_database(id):
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("SELECT * FROM items WHERE id = %s", (id,))
+            cursor.execute("SELECT * FROM event_calendar.Event WHERE id = %s", (id,))
             row = cursor.fetchone()
             if row:
                 item = Event(
@@ -118,7 +118,7 @@ def update_item_in_database(id, event:Create_Event):
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("UPDATE items SET name=%s,start_date=%s, end_date= %s, type= %s, description= %s, picture= %s WHERE id = %s", (event.name,event.start_date,event.end_date, event.type, event.description, event.picture, id))
+            cursor.execute("UPDATE event_calendar.Event SET name=%s,start_date=%s, end_date= %s, type= %s, description= %s, picture= %s WHERE id = %s", (event.name,event.start_date,event.end_date, event.type, event.description, event.picture, id))
             connection.commit()
             cursor.close()
             connection.close()
@@ -136,7 +136,7 @@ def delete_item_from_database(id):
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            delete_query = """DELETE FROM your_table_name WHERE id = %s"""  # Change 'your_table_name' to your table's name
+            delete_query = """DELETE FROM event_calendar.Event WHERE id = %s""" 
             cursor.execute(delete_query, (id,))
             connection.commit()
             cursor.close()
@@ -147,6 +147,7 @@ def delete_item_from_database(id):
 
 def get_legend_from_DB():
     #we will need a table for Type and their description
+    #revisit
     """Gets the legend from the database and returns a JSON object."""
     try:
         connection = mysql.connector.connect(
@@ -157,7 +158,7 @@ def get_legend_from_DB():
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("SELECT DISTINCT Type, description, color FROM events")
+            cursor.execute("SELECT DISTINCT Type, description, color FROM event_calendar.Event")
             rows = cursor.fetchall()
             legend = {row[0]: {'description': row[1], 'color': row[2]} for row in rows}
             cursor.close()
