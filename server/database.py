@@ -10,7 +10,6 @@ password_DB='SwyQcGYvKEXubkjXfCJEMLnRB'
 def connect_to_mariadb():
     """Connects to a MariaDB database and prints the database version."""
     try:
-        # Connection parameters
         connection = mysql.connector.connect(
             host=host_name,
             database=database_name,
@@ -21,7 +20,6 @@ def connect_to_mariadb():
         if connection.is_connected():
             db_info = connection.get_server_info()
             print(f"Successfully connected to MariaDB server version {db_info}")
-            # Close the connection
             connection.close()
     except Error as e:
         print(f"Error: {e}")
@@ -39,9 +37,15 @@ def add_item_to_database(event: Create_Event):
             cursor = connection.cursor()
             cursor.execute("INSERT INTO event_calendar.Event (name,start_date, end_date, type, description, picture) VALUES (%s, %s, %s, %s, %s, %s)", (event.name,event.start_date,event.end_date, event.type, event.description, event.picture))
             connection.commit()
-            print(f"Item added to database with id {cursor.lastrowid}")
-            cursor.close()
-            connection.close()
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
+            
     except Error as e:
         print(f"Error: {e}")
 
@@ -58,21 +62,9 @@ def get_items_from_database():
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM event_calendar.Event")
             rows = cursor.fetchall()
-            items = []
-            for row in rows:
-                event = Event(
-                    id=row[0],
-                    name=row[1],
-                    start_date=row[2],
-                    end_date=row[3],
-                    type=row[4],
-                    description=row[5],
-                    picture=row[6]
-                )
-                items.append(event)
             cursor.close()
             connection.close()
-            return items
+            return rows
     except Error as e:
         print(f"Error: {e}")
         return []
@@ -90,19 +82,9 @@ def get_item_from_database(id):
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM event_calendar.Event WHERE id = %s", (id,))
             row = cursor.fetchone()
-            if row:
-                item = Event(
-                    id=row[0],
-                    name=row[1],
-                    start_date=row[2],
-                    end_date=row[3],
-                    type=row[4],
-                    description=row[5],
-                    picture=row[6]
-                )
-                cursor.close()
-                connection.close()
-                return item
+            cursor.close()
+            connection.close()
+            return row
     except Error as e:
         print(f"Error: {e}")
     return None
@@ -120,8 +102,14 @@ def update_item_in_database(id, event:Create_Event):
             cursor = connection.cursor()
             cursor.execute("UPDATE event_calendar.Event SET name=%s,start_date=%s, end_date= %s, type= %s, description= %s, picture= %s WHERE id = %s", (event.name,event.start_date,event.end_date, event.type, event.description, event.picture, id))
             connection.commit()
-            cursor.close()
-            connection.close()
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
     except Error as e:
         print(f"Error: {e}")
 
@@ -139,15 +127,18 @@ def delete_item_from_database(id):
             delete_query = """DELETE FROM event_calendar.Event WHERE id = %s""" 
             cursor.execute(delete_query, (id,))
             connection.commit()
-            cursor.close()
-            connection.close()
-            print("Record deleted successfully")
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
     except Error as e:
         print(f"Error: {e}")
 
 def get_legend_from_DB():
-    #we will need a table for Type and their description
-    #revisit
     """Gets the legend from the database and returns a JSON object."""
     try:
         connection = mysql.connector.connect(
@@ -158,9 +149,9 @@ def get_legend_from_DB():
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("SELECT DISTINCT Type, description, color FROM event_calendar.Event")
+            cursor.execute("SELECT DISTINCT Type FROM event_calendar.Event")
             rows = cursor.fetchall()
-            legend = {row[0]: {'description': row[1], 'color': row[2]} for row in rows}
+            legend=[row[0] for row in rows]
             cursor.close()
             connection.close()
             return legend

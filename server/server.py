@@ -23,80 +23,39 @@ def home():
 
 @app.route('/api/items', methods=['GET'])
 def get_items():
-    items = [
-        {
-            'id': 1,
-            'name': 'Event1',
-            'start_date': '2024-03-06',
-            'end_date': '2024-03-07',
-            'type': 'TypeA',
-            'description': 'This is a description of the item',
-            'picture': 'ulr to picture of the item'
-        },
-        {
-            'id': 2,
-            'start_date': '2024-03-07',
-            'end_date': '2024-03-07',
-            'type': 'TypeB',
-            'description': 'This is a description of the item',
-            'picture': 'ulr to picture of the item'
-        }
-        # Add more items as needed
-    ]
-    #after implementing the database, replace the above items with the following line
-    #items = database.get_items_from_database()
+    items = database.get_items_from_database()
     return jsonify(items)
 
 @app.route('/api/items/<int:id>', methods=['GET'])
 def get_item(id):
-    items = [
-        {
-            'id': 1,
-            'name': 'Event1',
-            'start_date': '2024-03-06',
-            'end_date': '2024-03-07',
-            'type': 'TypeA',
-            'description': 'This is a description of the item',
-            'picture': 'ulr to picture of the item'
-        },
-        {
-            'id': 2,
-            'name': 'Event2',
-            'start_date': '2024-03-07',
-            'end_date': '2024-03-07',
-            'type': 'TypeB',
-            'description': 'This is a description of the item',
-            'picture': 'ulr to picture of the item'
-        }
-        # Add more items as needed
-    ]
-    item = next((item for item in items if item['id'] == id), None)
-    #after implementing the database, replace the above items with the following line
-    # items = database.get_item_from_database(id)
+    item = database.get_item_from_database(id)
     if item:
         return jsonify(item)
     return jsonify({'message': 'Item not found'}), 404
 
 @app.route('/api/add', methods=['POST'])
 #admin
+#Todo:validators
 def add_item():
-    data = request.get_json()  # Get data from POST request
+    data = request.get_json()
     name=data.get('name')
+    #date format-> Wed, 01 May 2024 08:00:00 GMT
     start_date = data.get('start_date')
     end_date = data.get('end_date')
     type = data.get('type')
     description = data.get('description')
     picture = data.get('picture')
     event = Create_Event(name,start_date, end_date, type, description, picture)
-
-    database.add_item_to_database(event)
-    return jsonify({'message': 'Item added'}), 201
+    if database.add_item_to_database(event):
+        return jsonify({'message': 'Item added'}), 201
+    return jsonify({'message': 'Item not added'}), 400
 
 @app.route('/api/update/<int:id>', methods=['PUT'])
 #admin
+#TOdO:validators
 def update_item(id):
     event=get_item(id)
-    data = request.get_json()  # Get data from PUT request
+    data = request.get_json()
     name=data.get('name')
     start_date = data.get('start_date')
     end_date = data.get('end_date')
@@ -104,18 +63,20 @@ def update_item(id):
     description = data.get('description')
     picture = data.get('picture')
     event=Create_Event(name,start_date, end_date, type, description, picture)
-    database.update_item_in_database(id, event)
-    #can return new updated item if needed
-    return jsonify({'message': 'Item updated'}), 200
+    if database.update_item_in_database(id, event):
+        return jsonify({'message': 'Item updated'}), 200
+    else:
+        return jsonify({'message': 'Item not updated'}), 400
 
 
 @app.route('/api/delete/<int:id>', methods=['DELETE'])
 #admin
 def delete_item(id):
-    #after implementing the database, call the delete_item_from_database function
-    database.delete_item_from_database(id)
-    return jsonify({'message': 'Item deleted'}), 200
-
+    if database.delete_item_from_database(id):
+        return jsonify({'message': 'Item deleted'}), 200
+    else:
+        return jsonify({'message': 'Item not deleted'}), 400
+    
 @app.route('/api/feedback', methods=['POST'])
 def send_feedback():
     data = request.get_json()
@@ -135,6 +96,6 @@ def get_legend():
     legend = database.get_legend_from_DB()
     return jsonify(legend)
 
-#update delete legend
+
 if __name__ == '__main__':
     app.run(debug=True, port=8081)
