@@ -34,15 +34,26 @@
           />
         </div>
         <div class="title">RPS Sofia Event Calendar</div>
-        <button class="header-btn">Contact Us</button>
+        <button class="header-btn" onclick="location.href='#contact_us'">Contact Us</button>
       </header>
       <div id="calendar"></div>
-      <div class="legend">Legend</div>
+      <div class="legend">
+        <div class="legend-title">Event Types</div>
+        <div class="legend-item">
+          <div class="legend-item-text ff">HPE funded event</div>
+        </div>
+        <div class="legend-item sf">
+          <div class="legend-item-text">Self funded event</div>
+        </div>
+        <div class="legend-item pf">
+          <div class="legend-item-text">Partially funded by HPE</div>
+        </div>
+      </div>
       <div class="contact">
         <div class="contact_title">Get in touch with us</div>
       </div>
-      <div class="feedback">
-        Feel free to send us your feedback,</br> suggestions, and comments.
+      <div id="contact_us" class="feedback">
+        Feel free to send us your feedback,</br> suggestions and comments.
       </div>
       <div class="form-elements">
         <label>Your name:</label></br>
@@ -61,7 +72,7 @@
             src="{{ url_for('static',filename='images/logo.svg') }}"
             />
         </div>
-        <div class="footer-section">2024 Property of RPS Sofia Team</div>
+        <div class="footer-section">2024 Property of RPS Sofia Hub</div>
       </footer>
     </div>
   </body>
