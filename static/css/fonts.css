@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "MetricHPE-Black";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Black.woff");
+}
+@font-face {
+  font-family: "MetricHPE-Bold";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Bold.woff");
+}
+@font-face {
+  font-family: "MetricHPE-Semibold";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Semibold.woff");
+}
+@font-face {
+  font-family: "MetricHPE-Medium";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Medium.woff");
+}
+@font-face {
+  font-family: "MetricHPE-Regular";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Regular.woff");
+}
+@font-face {
+  font-family: "MetricHPE-Light";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Light.woff");
+}
+@font-face {
+  font-family: "MetricHPE-Thin";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-Thin.woff");
+}
+@font-face {
+  font-family: "MetricHPE-BoldItalic";
+  src: url("../fonts/metrichpe/MetricHPE_Web/MetricHPE-Web-BoldItalic.woff");
+}

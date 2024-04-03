@@ -1,11 +1,9 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask import Flask, jsonify, request, render_template
 from flask_mail import Mail, Message
 import database
 from model import Create_Event
 
 app = Flask(__name__)
-CORS(app)
 
 #Gmail wont work- you need to enable less secure apps in your google account
 app.config['MAIL_SERVER']='smtp-mail.outlook.com'
@@ -17,9 +15,9 @@ app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 
 
-@app.route('/api/home', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
-    return jsonify({'message': 'Hello, World!'})
+    return render_template('index.html')
 
 @app.route('/api/items', methods=['GET'])
 def get_items():
@@ -35,7 +33,7 @@ def get_item(id):
 
 @app.route('/api/add', methods=['POST'])
 #admin
-#Todo:validators
+#TODO:validators
 def add_item():
     data = request.get_json()
     name=data.get('name')
@@ -52,7 +50,7 @@ def add_item():
 
 @app.route('/api/update/<int:id>', methods=['PUT'])
 #admin
-#TOdO:validators
+#TODO:validators
 def update_item(id):
     event=get_item(id)
     data = request.get_json()
@@ -71,6 +69,7 @@ def update_item(id):
 
 @app.route('/api/delete/<int:id>', methods=['DELETE'])
 #admin
+#TODO:validators
 def delete_item(id):
     if database.delete_item_from_database(id):
         return jsonify({'message': 'Item deleted'}), 200
@@ -98,4 +97,4 @@ def get_legend():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8081)
+    app.run(debug=True)

@@ -1,0 +1,15 @@
+03-04-2024: 
+1. Removed all next.js stuff
+2. Added standalone fullcalendar js
+3. Added HPE fonts and logo
+4. Created all css files
+5. Created index.html and styled it
+6. Created the following folder structure:
+
+app/:
+    static/:
+        css/:
+        js/:
+        fonts/:
+        images/:
+    templates/:

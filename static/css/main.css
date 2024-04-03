@@ -1,0 +1,189 @@
+@import url("fonts.css");
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: 7% 45% 10% 20% 15% 5% 5%;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . . . . . ."
+    ". . . . . . . .";
+}
+
+.header {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 9;
+  align-items: center;
+  margin-bottom: 10px;
+  background: radial-gradient(circle 1100px, #17eba0, #f7f7f7);
+}
+.logo {
+  grid-column: 1;
+  text-align: center;
+  padding-left: 20px;
+}
+
+.title {
+  grid-column-start: 2;
+  grid-column-end: 8;
+  text-align: center;
+  font-size: 80px;
+  font-family: "MetricHPE-Black";
+}
+.header-btn {
+  grid-column: 8;
+  margin-left: 10px;
+  margin-right: 20px;
+  display: block;
+  width: 90%;
+  border: none;
+  background-color: #01a982;
+  color: white;
+  padding: 14px 28px;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "MetricHPE-Regular";
+}
+.header-btn:hover {
+  background-color: #00e8cf;
+  color: black;
+}
+
+#calendar {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  margin-left: 150px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: "MetricHPE-Medium";
+}
+
+.legend {
+  grid-column-start: 6;
+  grid-column-end: 9;
+  background-color: aqua;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 150px;
+  margin-bottom: 20px;
+  font-family: "MetricHPE-Regular";
+}
+
+.contact {
+  grid-column: 1 / -1;
+  margin-top: 20px;
+  align-items: center;
+  margin-bottom: 10px;
+  background: radial-gradient(circle 1100px, #17eba0, #f7f7f7);
+  text-align: center;
+}
+
+.contact_title {
+  font-size: 80px;
+  text-align: center;
+  margin-top: 25px;
+  font-family: "MetricHPE-Black";
+}
+
+.feedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-column: 1 / 5;
+  font-size: 60px;
+  margin-left: 150px;
+  padding-left: 50px;
+  font-family: "MetricHPE-BoldItalic";
+}
+.form-elements {
+  grid-column: 5 / -1;
+  margin-right: 150px;
+  font-family: "MetricHPE-Regular";
+  font-weight: bold;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  margin-bottom: 20px;
+}
+
+.small-textbox {
+  font-family: "MetricHPE-Regular";
+  font-size: large;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.container_big_textbox {
+  grid-column: 1 / -1;
+  background-color: chocolate;
+  margin-left: 150px;
+  margin-right: 150px;
+  padding-right: 6px;
+}
+
+.big-textbox {
+  height: 100%;
+  width: 100%;
+  resize: none;
+  font-family: "MetricHPE-Regular";
+  font-size: large;
+}
+
+.send-btn {
+  grid-column: 6 / -1;
+  margin-right: 150px;
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #01a982;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  font-family: "MetricHPE-Regular";
+  justify-self: end;
+  margin-top: 40px;
+}
+
+.send-btn:hover {
+  background-color: #00e8cf;
+  color: black;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column: 1 / -1;
+  background-color: #0000005c;
+  margin-top: 20px;
+  padding-top: 10px;
+  align-items: center;
+  font-family: "MetricHPE-Regular";
+  font-size: larger;
+  font-weight: bold;
+}
+.logo_image_footer {
+  grid-column: 1 / 3;
+  width: 100px;
+  height: 50px;
+  padding-left: 20px;
+}
+.footer_section {
+  grid-column: 5 / -1;
+  text-align: center;
+}
