@@ -11,6 +11,7 @@
       href="{{ url_for('static',filename='css/main.css') }}"
     />
     <script src="{{ url_for('static',filename='js/calendar.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var calendarEl = document.getElementById("calendar");
@@ -57,14 +58,14 @@
       </div>
       <div class="form-elements">
         <label>Your name:</label></br>
-        <input type="text" class="small-textbox" placeholder="Name" />
+        <input id="name" type="text" class="small-textbox" placeholder="John Doe" />
         <label>Your email:</label></br>
-        <input type="text" class="small-textbox" placeholder="Email" />
+        <input id="email" type="text" class="small-textbox" placeholder="example@company.com" />
       </div>
       <div class="container_big_textbox">
-        <textarea class="big-textbox" placeholder="Your message..."></textarea>
+        <textarea id="feedback_text" class="big-textbox" placeholder="Your message..."></textarea>
       </div>
-      <button class="send-btn">Submit</button>
+      <button class="send-btn" onclick="submitFeedback();">Submit</button>
       <footer class="footer">
         <div class="footer-section">          
             <img
