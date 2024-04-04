@@ -157,3 +157,28 @@ def get_legend_from_DB():
             return legend
     except Error as e:
         print(f"Error: {e}")
+
+def add_user_to_database(admin_username, admin_password, salt):
+    """Adds an admin user to the database."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("INSERT INTO event_calendar.users (username,password,salt) VALUES (%s, %s, %s)", (admin_username, admin_password, salt))
+            connection.commit()
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
+    except Error as e:
+        print(f"Error: {e}")
+        
