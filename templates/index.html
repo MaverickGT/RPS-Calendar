@@ -13,17 +13,10 @@
     <script src="{{ url_for('static',filename='js/calendar.js') }}"></script>
     <script src="{{ url_for('static',filename='js/main.js') }}"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: "dayGridMonth",
-        });
-        calendar.render();
-        calendar.updateSize();
-      });
+      loadCalendar();
     </script>
     <title>RPS Sofia Event Calendar</title>
-    <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> add title icon at some point in the future-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='images/rps_icon.png') }}">
   </head>
   <body>
     <div class="grid-container">
@@ -42,22 +35,22 @@
         <div class="legend-title">Event Types</div>
         <div class="legend-item">
           <div class="square ff"></div>
-          <div class="legend-item-text">HPE funded event</div>
+          <div class="legend-item-text">Quality Time at the Office</div>
         </div>
         <div class="legend-item">
           <div class="square sf"></div>
-          <div class="legend-item-text">Self funded event</div>
+          <div class="legend-item-text">Afterwork Leisure Time</div>
         </div>
         <div class="legend-item">
           <div class="square pf"></div>
-          <div class="legend-item-text">Partially funded by HPE</div>
+          <div class="legend-item-text">Cross Hub Collaboration</div>
         </div>
       </div>
       <div class="contact">
         <div class="contact_title">Get in touch with us</div>
       </div>
       <div id="contact_us" class="feedback">
-        Feel free to send us your feedback,</br> suggestions and comments.
+        Feel free to send us your feedback</br>and suggestions for events.
       </div>
       <div class="form-elements">
         <label>Your name:</label></br>
@@ -76,7 +69,7 @@
             src="{{ url_for('static',filename='images/logo.svg') }}"
             />
         </div>
-        <div class="footer-section">2024 Property of RPS Sofia Hub</div>
+        <div class="footer-section">© 2024 Property of RPS Sofia Hub</div>
       </footer>
     </div>
   </body>
