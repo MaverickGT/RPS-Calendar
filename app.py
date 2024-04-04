@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request, render_template
 from flask_mail import Mail, Message
+from flask_cors import CORS
 import database
 from model import Create_Event
 
 app = Flask(__name__)
+CORS(app)
 
 #Gmail wont work- you need to enable less secure apps in your google account
 app.config['MAIL_SERVER']='smtp-mail.outlook.com'
@@ -97,4 +99,4 @@ def get_legend():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8081)

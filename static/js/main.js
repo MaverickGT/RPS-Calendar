@@ -19,7 +19,7 @@ function clearFeedback() {
 function submitFeedback() {
   var data = getValue();
   console.log(data);
-  fetch("http://localhost:5000/api/feedback", {
+  fetch("http://localhost:8081/api/feedback", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

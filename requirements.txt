@@ -2,4 +2,3 @@ mysql-connector-python
 flask
 flask-cors
 Flask-Mail
-Flask-Cors
