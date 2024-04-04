@@ -181,4 +181,24 @@ def add_user_to_database(admin_username, admin_password, salt):
                 return False
     except Error as e:
         print(f"Error: {e}")
+
+def get_user_from_database(admin_username):
+    """Gets an admin user from the database by its username."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM event_calendar.users WHERE username = %s", (admin_username,))
+            row = cursor.fetchone()
+            cursor.close()
+            connection.close()
+            return row
+    except Error as e:
+        print(f"Error: {e}")
+    return None
         
