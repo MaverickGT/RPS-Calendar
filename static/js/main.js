@@ -32,3 +32,19 @@ function submitFeedback() {
       clearFeedback();
     });
 }
+
+function getEvents() {
+  fetch("http://localhost:8081/api/items")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      var events = data.data;
+      var eventList = document.getElementById("eventList");
+      eventList.innerHTML = "";
+      events.forEach((event) => {
+        var eventItem = document.createElement("li");
+        eventItem.innerHTML = event.name;
+        eventList.appendChild(eventItem);
+      });
+    });
+}
