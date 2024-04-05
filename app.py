@@ -35,17 +35,19 @@ def get_item(id):
 
 @app.route('/api/add', methods=['POST'])
 #admin
-#TODO:validators
 def add_item():
     data = request.get_json()
     name=data.get('name')
-    #date format-> Wed, 01 May 2024 08:00:00 GMT
     start_date = data.get('start_date')
     end_date = data.get('end_date')
     type = data.get('type')
+    color = data.get('color')
     description = data.get('description')
     picture = data.get('picture')
-    event = Create_Event(name,start_date, end_date, type, description, picture)
+    start_time = data.get('start_time')
+    end_time = data.get('end_time')
+    all_day = data.get('all_day')
+    event = Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day)
     if database.add_item_to_database(event):
         return jsonify({'message': 'Item added'}), 201
     return jsonify({'message': 'Item not added'}), 400
@@ -60,9 +62,13 @@ def update_item(id):
     start_date = data.get('start_date')
     end_date = data.get('end_date')
     type = data.get('type')
+    color = data.get('color')
     description = data.get('description')
     picture = data.get('picture')
-    event=Create_Event(name,start_date, end_date, type, description, picture)
+    start_time = data.get('start_time')
+    end_time = data.get('end_time')
+    all_day = data.get('all_day')
+    event=Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day)
     if database.update_item_in_database(id, event):
         return jsonify({'message': 'Item updated'}), 200
     else:
