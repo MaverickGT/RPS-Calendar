@@ -1,6 +1,7 @@
-import mysql.connector
-from mysql.connector import Error
+import mysql.connector # type: ignore
+from mysql.connector import Error # type: ignore
 from model import Create_Event, Event
+import json
 
 host_name='78.128.76.186'
 database_name='event_calendar'
@@ -61,10 +62,11 @@ def get_items_from_database():
         if connection.is_connected():
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM event_calendar.Event")
-            rows = cursor.fetchall()
+            columns = [column[0] for column in cursor.description]
+            data = [dict(zip(columns, row)) for row in cursor.fetchall()]
             cursor.close()
             connection.close()
-            return rows
+            return data
     except Error as e:
         print(f"Error: {e}")
         return []
