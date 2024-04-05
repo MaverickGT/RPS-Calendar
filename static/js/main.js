@@ -80,7 +80,9 @@ async function loadCalendar() {
       console.log(event);
       document.getElementById("modal-title").innerHTML = title;
       document.getElementById("modal-description").innerHTML = description;
-      document.getElementById("modal-location").innerHTML = location;
+      document
+        .getElementById("modal-location-link")
+        .setAttribute("href", location);
       document.getElementById("modal-start-time").innerHTML = start_time;
       document.getElementById("modal-end-time").innerHTML = end_time;
       document

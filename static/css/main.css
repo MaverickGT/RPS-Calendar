@@ -234,9 +234,10 @@ html {
   transition: 200ms ease-in-out;
   z-index: 10;
   background-color: #ffffff;
-  width: 700px;
+  width: 40%;
   max-width: 80%;
   box-shadow: 0px 12px 24px #0000003d;
+  height: 95%;
 }
 
 .modal.active {
@@ -267,6 +268,15 @@ html {
   text-align: center;
 }
 
+.modal-time-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-bottom: 5%;
+}
+
 .modal-content-title {
   font-size: 40px;
   font-family: "MetricHPE-Bold";
@@ -279,15 +289,21 @@ html {
   margin-bottom: 10px;
 }
 
+#modal-location,
+#modal-start-time,
+#modal-end-time {
+  background-color: #cccccc;
+}
+
 .modal-content-text {
-  font-size: 20px;
+  font-size: 1.4rem;
   font-family: "MetricHPE-Regular";
   margin-bottom: 20px;
 }
 
 #modal-image {
-  width: 50%;
-  height: auto;
+  width: 600px;
+  height: 300px;
   margin-bottom: 20px;
 }
 
@@ -355,4 +371,17 @@ html {
 
 .fc-event {
   cursor: pointer;
+}
+
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
 }
