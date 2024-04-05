@@ -106,7 +106,16 @@ def send_feedback():
     customer_name = data.get('name')
     customer_email = data.get('email')
     feedback = data.get('feedback')
+    
+    if not customer_name or not customer_email or not feedback:
+        return jsonify({'message': 'Missing data'}), 400
 
+    if " " in customer_email:
+        return jsonify({'message': 'Invalid Email'}), 400
+    
+    if not '@hpe.com' in customer_email:
+        return jsonify({'message': 'You need you use your HPE email'}), 400
+    
     # Our mailbox send the feedback to herself
     msg = Message('New Feedback', sender="hpecalendar@outlook.com", recipients=["hpecalendar@outlook.com"])
     msg.body = f"Name: {customer_name}\nEmail: {customer_email}\nFeedback: {feedback}"
