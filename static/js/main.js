@@ -116,7 +116,7 @@ window.onload = function () {
     .catch((error) => {
       console.error("Error loading calendar:", error);
     });
-  myVar = setTimeout(showPage, 100);
+  myVar = setTimeout(showPage, 300);
 };
 
 function showPage() {
