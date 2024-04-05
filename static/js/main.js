@@ -53,11 +53,13 @@ async function loadCalendar() {
       end: events_data[i].end_date,
       color: events_data[i].color,
       textColor: "black",
-      description: events_data[i].description,
-      location: events_data[i].location,
-      image: events_data[i].image,
-      start_time: events_data[i].start_time,
-      end_time: events_data[i].end_time,
+      extendedProps: {
+        description: events_data[i].description,
+        location: events_data[i].location,
+        image: events_data[i].picture,
+        start_time: events_data[i].start_time,
+        end_time: events_data[i].end_time,
+      },
     };
     events.push(event);
   }
@@ -69,19 +71,21 @@ async function loadCalendar() {
     events: events,
     eventClick: function (info) {
       var event = info.event;
-      var start_time = event.start_time;
-      var end_time = event.end_time;
+      var start_time = event.extendedProps.start_time;
+      var end_time = event.extendedProps.end_time;
       var title = event.title;
-      var description = event.description;
-      var location = event.location;
-      var image = event.image;
+      var description = event.extendedProps.description;
+      var location = event.extendedProps.location;
+      var image = event.extendedProps.image;
       console.log(event);
       document.getElementById("modal-title").innerHTML = title;
       document.getElementById("modal-description").innerHTML = description;
       document.getElementById("modal-location").innerHTML = location;
       document.getElementById("modal-start-time").innerHTML = start_time;
       document.getElementById("modal-end-time").innerHTML = end_time;
-      document.getElementById("modal-image").src = image;
+      document
+        .getElementById("modal-image")
+        .setAttribute("src", "/static/images/" + image);
       document.getElementById("modal").classList.add("active");
       document.getElementById("overlay").classList.add("active");
       const closeModalButton = document.querySelectorAll("[data-close-button]");

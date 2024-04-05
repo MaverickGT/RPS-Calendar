@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request, render_template
-from flask_mail import Mail, Message
-from flask_cors import CORS
+from flask_mail import Mail, Message # type: ignore
+from flask_cors import CORS # type: ignore
 import database
 import os
 from model import Create_Event
 from manager import check_username_and_password
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity # type: ignore
 
 app = Flask(__name__)
 CORS(app)
