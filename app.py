@@ -24,6 +24,11 @@ def home():
 @app.route('/api/items', methods=['GET'])
 def get_items():
     items = database.get_items_from_database()
+    for item in items:
+        if item['all_day'] == 1:
+            item['all_day'] = True
+        else:
+            item['all_day'] = False
     return jsonify(items)
 
 @app.route('/api/items/<int:id>', methods=['GET'])
