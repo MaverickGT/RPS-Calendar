@@ -2,10 +2,15 @@ from flask import Flask, jsonify, request, render_template
 from flask_mail import Mail, Message
 from flask_cors import CORS
 import database
+import os
 from model import Create_Event
+from manager import check_username_and_password
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 CORS(app)
+app.config['JWT_SECRET_KEY'] =  os.urandom(64)
+jwt = JWTManager(app)
 
 #Gmail wont work- you need to enable less secure apps in your google account
 app.config['MAIL_SERVER']='smtp-mail.outlook.com'
@@ -21,6 +26,19 @@ mail = Mail(app)
 def home():
     return render_template('index.html')
 
+@app.route('/api/admin/login', methods=['POST'])
+def admin_login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    if not check_username_and_password(username, password):
+        return jsonify({'message': 'Bad credentials'}), 401
+
+    access_token = create_access_token(identity=username)
+
+    return jsonify(access_token=access_token), 200
+
 @app.route('/api/items', methods=['GET'])
 def get_items():
     items = database.get_items_from_database()
@@ -33,8 +51,8 @@ def get_item(id):
         return jsonify(item)
     return jsonify({'message': 'Item not found'}), 404
 
-@app.route('/api/add', methods=['POST'])
-#admin
+@app.route('/api/admin/add', methods=['POST'])
+@jwt_required()
 def add_item():
     data = request.get_json()
     name=data.get('name')
@@ -52,9 +70,8 @@ def add_item():
         return jsonify({'message': 'Item added'}), 201
     return jsonify({'message': 'Item not added'}), 400
 
-@app.route('/api/update/<int:id>', methods=['PUT'])
-#admin
-#TODO:validators
+@app.route('/api/admin/update/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_item(id):
     event=get_item(id)
     data = request.get_json()
@@ -75,9 +92,8 @@ def update_item(id):
         return jsonify({'message': 'Item not updated'}), 400
 
 
-@app.route('/api/delete/<int:id>', methods=['DELETE'])
-#admin
-#TODO:validators
+@app.route('/api/admin/delete/<int:id>', methods=['DELETE'])
+@jwt_required()
 def delete_item(id):
     if database.delete_item_from_database(id):
         return jsonify({'message': 'Item deleted'}), 200
