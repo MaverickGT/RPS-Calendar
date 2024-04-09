@@ -1,0 +1,85 @@
+@import url("fonts.css");
+body {
+  font-family: "MetricHPE-Regular";
+}
+
+.title {
+  font-size: 60px !important;
+}
+
+.admin-panel {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.event-form {
+  max-width: 80%;
+  width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.event-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.event-form input[type="text"],
+.event-form textarea,
+.event-form select {
+  width: 95%;
+  padding: 2%;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.event-form textarea {
+  height: 150px;
+  resize: none;
+}
+
+.event-form button {
+  display: block;
+  width: 30%;
+  margin-top: 20px;
+  padding: 2%;
+}
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.date-time-container {
+  display: flex;
+  justify-content: flex-start;
+  height: 80px;
+  width: 100%;
+}
+
+.event-form input[type="date"] {
+  width: 80%;
+  padding: 8%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.event-form input[type="time"] {
+  width: 80%;
+  padding: 7%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.input-container {
+  width: 45%;
+}
+
+.event-organizer {
+  display: flex;
+  justify-content: space-between;
+}

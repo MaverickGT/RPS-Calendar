@@ -26,18 +26,21 @@ mail = Mail(app)
 def home():
     return render_template('index.html')
 
-@app.route('/api/admin/login', methods=['POST'])
+@app.route('/api/admin/login', methods=['GET','POST'])
 def admin_login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    if request.method == 'POST':
+        data = request.get_json()
+        username = data.get('username')
+        password = data.get('password')
 
-    if not check_username_and_password(username, password):
-        return jsonify({'message': 'Bad credentials'}), 401
+        if not check_username_and_password(username, password):
+            return jsonify({'message': 'Bad credentials'}), 401
 
-    access_token = create_access_token(identity=username)
+        access_token = create_access_token(identity=username)
 
-    return jsonify(access_token=access_token), 200
+        return jsonify(access_token=access_token), 200
+    else:
+        return render_template('login.html')
 
 @app.route('/api/items', methods=['GET'])
 def get_items():
