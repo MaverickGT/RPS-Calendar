@@ -14,6 +14,7 @@
     />
     <script src="{{ url_for('static',filename='js/update.js') }}"></script>
     <script src="{{ url_for('static',filename='js/delete.js') }}"></script>
+    <script defer src="{{ url_for('static',filename='js/create.js') }}"></script>
   </head>
   <body>
     <header class="header admin-header">
@@ -63,7 +64,7 @@
         </button>
       </div>
       
-      <form class="event-form">
+      <div onsubmit="handleSubmitEvent(e)" class="event-form" id="event-form">
         <h2>Create Event</h2>
         <label for="event-name">Event Name</label>
         <input type="text" id="event-name" name="event-name" />
@@ -112,8 +113,8 @@
           </div>
         </div>
     
-        <button type="submit" class="create-event">Create Event</button>
-      </form>
+        <button onclick="handleSubmitEvent()" class="create-event">Create Event</button>
+      </div>
     </div>    
   </body>
   

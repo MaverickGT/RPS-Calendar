@@ -36,7 +36,7 @@ def admin_login():
         if not check_username_and_password(username, password):
             return jsonify({'message': 'Bad credentials'}), 401
 
-        access_token = create_access_token(identity=username)
+        access_token = create_access_token(identity=username) # check jwt creation algo 
 
         return jsonify(access_token=access_token), 200
     else:
@@ -72,9 +72,11 @@ def get_item(id):
     return jsonify({'message': 'Item not found'}), 404
 
 @app.route('/api/admin/add', methods=['POST'])
-@jwt_required()
+@jwt_required() # check jwt decoding algo
 def add_item():
     data = request.get_json()
+    print(data)
+
     name=data.get('name')
     start_date = data.get('start_date')
     end_date = data.get('end_date')

@@ -16,7 +16,7 @@ const handleSubmit = () => {
                 alert('Failed to login: ' + data.message);
             } else {
                 localStorage.setItem("hpe-jtw", data.access_token)
-                location.href="http://localhost:8081/api/admin"
+                location.href="http://localhost:8081/api/admin/create"
             }
         })
 }

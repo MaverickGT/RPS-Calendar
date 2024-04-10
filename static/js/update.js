@@ -27,8 +27,23 @@ const createOption = (event) => {
 }
 
 const handleRenderSelectedEvent = async (eventId) => {
-    const event = await handleFetchEvent(eventId);
-    console.log(event);
+    const events = await handleFetchEvents();
+    const event = events.find(({ id }) => id === eventId);
+    
+    const { location, description, start_time, end_time, start_date, end_date } = event;
+    const eventLocationInput = document.getElementById('event-location');
+    const eventDescriptionTextarea = document.getElementById('event-description');
+    const startTimeInput = document.getElementById('start-time');
+    const endTimeInput = document.getElementById('end-time');
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('end-date');
+
+    eventLocationInput.value = location;
+    eventDescriptionTextarea.value = description;
+    startTimeInput.value = start_time;
+    endTimeInput.value = end_time;
+    startDateInput.value = start_date;
+    endDateInput.value = end_date;
 }
 
 const handleRenderEvents = async () => {
@@ -41,9 +56,8 @@ const handleRenderEvents = async () => {
     });
 
     eventNameDropdown.addEventListener("change", (e) => {
-        handleRenderSelectedEvent(e.target.value);
+        handleRenderSelectedEvent(Number(e.target.value));
     })
 }
-
 
 handleRenderEvents();
