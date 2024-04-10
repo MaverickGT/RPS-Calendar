@@ -77,7 +77,8 @@ def add_item():
     start_time = data.get('start_time')
     end_time = data.get('end_time')
     all_day = data.get('all_day')
-    event = Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day)
+    location=data.get('location')
+    event = Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day,location)
     if database.add_item_to_database(event):
         return jsonify({'message': 'Item added'}), 201
     return jsonify({'message': 'Item not added'}), 400
@@ -97,7 +98,8 @@ def update_item(id):
     start_time = data.get('start_time')
     end_time = data.get('end_time')
     all_day = data.get('all_day')
-    event=Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day)
+    location=data.get('location')
+    event=Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day,location)
     if database.update_item_in_database(id, event):
         return jsonify({'message': 'Item updated'}), 200
     else:

@@ -1,5 +1,5 @@
 class Create_Event:
-    def __init__(self, name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day):
+    def __init__(self, name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day,location):
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
@@ -10,8 +10,9 @@ class Create_Event:
         self.start_time = start_time
         self.end_time = end_time
         self.all_day = all_day
+        self.location=location
 class Event:
-    def __init__(self, id, name, start_date, end_date, type, color, description, picture, start_time, end_time, all_day):
+    def __init__(self, id, name, start_date, end_date, type, color, description, picture, start_time, end_time, all_day,location):
         self.id = id
         self.name = name
         self.start_date = start_date
@@ -23,6 +24,7 @@ class Event:
         self.start_time = start_time
         self.end_time = end_time
         self.all_day = all_day
+        self.location=location
     
     def __str__(self) -> str:
         return f"Event {self.id}: {self.start_date} - {self.end_date} ({self.type}\n{self.picture}\n{self.description})"
