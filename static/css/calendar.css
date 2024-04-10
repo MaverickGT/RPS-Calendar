@@ -201,12 +201,7 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
   border-color: var(--fc-button-border-color, #01a982);
 }
 .fc .fc-button-primary:hover {
-  color: #fff;
-  color: var(--fc-button-text-color, #fff);
-  background-color: #00e8cf;
-  background-color: var(--fc-button-hover-bg-color, #00e8cf);
-  border-color: #00e8cf;
-  border-color: var(--fc-button-hover-border-color, #00e8cf);
+  opacity: 0.6;
 }
 .fc .fc-button-primary:disabled {
   /* not DRY */

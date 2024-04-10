@@ -42,6 +42,10 @@ def admin_login():
     else:
         return render_template('login.html')
 
+@app.route('/api/admin', methods=['GET'])
+def admin():
+    return render_template('admin.html')
+
 @app.route('/api/items', methods=['GET'])
 def get_items():
     items = database.get_items_from_database()

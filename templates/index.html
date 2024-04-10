@@ -27,7 +27,9 @@
           />
         </div>
         <div class="title">RPS SOFIA EVENT CALENDAR</div>
-        <button class="header-btn" onclick="location.href='#contact_us'">Contact Us</button>
+        <div class="header-btn-wrapper">
+          <button class="header-btn" onclick="location.href='#contact_us'">Contact Us</button>
+        </div>
       </header>
       <div id="calendar"></div>
       <div class="modal " id="modal">
@@ -88,8 +90,12 @@
       <div class="container_big_textbox">
         <textarea id="feedback_text" class="big-textbox" placeholder="Your message..."></textarea>
       </div>
-      <button class="send-btn" onclick="submitFeedback();">Submit</button>
+        <div class="send-btn-wrapper">
+          <button 
+          class="send-btn" onclick="submitFeedback();">Submit</button>
+        </div>
       <footer class="footer">
+        <div class="footer-title">RPS SOFIA EVENT CALENDAR</div>
         <div class="footer-section">© 2024 Property of RPS Sofia Hub</div>
       </footer>
     </div>
