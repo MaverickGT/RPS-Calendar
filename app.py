@@ -42,9 +42,17 @@ def admin_login():
     else:
         return render_template('login.html')
 
-@app.route('/api/admin', methods=['GET'])
+@app.route('/api/admin/create', methods=['GET'])
 def admin():
-    return render_template('admin.html')
+    return render_template('create.html')
+
+@app.route('/api/admin/update', methods=['GET'])
+def update_page():
+    return render_template('update.html')
+
+@app.route('/api/admin/delete', methods=['GET'])
+def delete_page():
+    return render_template('delete.html')
 
 @app.route('/api/items', methods=['GET'])
 def get_items():
