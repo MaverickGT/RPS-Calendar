@@ -10,6 +10,11 @@ const handleCreate = () => {
     location.href = "http://localhost:8081/api/admin/create"
 }
 
+const handleCalendar = () => {
+    localStorage.removeItem("hpe-jtw")
+    location.href = "http://localhost:8081/"
+}
+
 const handleSubmitEvent = () => {
     const eventLocation = document.getElementById('event-location').value;
     const eventDescription = document.getElementById('event-description').value;
@@ -20,7 +25,6 @@ const handleSubmitEvent = () => {
     const eventName = document.getElementById('event-name').value;
     const eventType = document.getElementById('event-type').value;
     const jwtToken = localStorage.getItem("hpe-jtw");
-    console.log(jwtToken);
     const body = {
         name: eventName,
         start_date: startDate,

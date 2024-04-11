@@ -11,8 +11,10 @@ const handleCreate = () => {
     location.href = "http://localhost:8081/api/admin/create"
 }
 
-
-console.log("###");
+const handleCalendar = () => {
+    localStorage.removeItem("hpe-jtw")
+    location.href = "http://localhost:8081/"
+}
 
 const handleFetchEvents = () => {
     return fetch('/api/items')

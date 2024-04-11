@@ -36,14 +36,14 @@ def admin_login():
         if not check_username_and_password(username, password):
             return jsonify({'message': 'Bad credentials'}), 401
 
-        access_token = create_access_token(identity=username) # check jwt creation algo 
+        access_token = create_access_token(identity=username) 
 
         return jsonify(access_token=access_token), 200
     else:
         return render_template('login.html')
 
 @app.route('/api/admin/create', methods=['GET'])
-def admin():
+def create_page():
     return render_template('create.html')
 
 @app.route('/api/admin/update', methods=['GET'])
@@ -75,8 +75,6 @@ def get_item(id):
 @jwt_required() 
 def add_item():
     data = request.get_json()
-    print(data)
-
     name=data.get('name')
     start_date = data.get('start_date')
     end_date = data.get('end_date')
@@ -98,7 +96,7 @@ def add_item():
 def update_item(id):
     event=get_item(id)
     data = request.get_json()
-    name=data.get('name')
+    name=database.get_name_from_database(id)
     start_date = data.get('start_date')
     end_date = data.get('end_date')
     type = data.get('type')
@@ -151,6 +149,7 @@ def send_feedback():
 def get_legend():
     legend = database.get_legend_from_DB()
     return jsonify(legend)
+
 
 
 if __name__ == '__main__':

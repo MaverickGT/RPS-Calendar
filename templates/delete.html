@@ -6,7 +6,7 @@
     <title>RPS Sofia Event Calendar - Admin Panel</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static',filename='css/create.css') }}"
+      href="{{ url_for('static',filename='css/admin.css') }}"
     />
     <link
       rel="stylesheet"
@@ -54,19 +54,21 @@
             <span>DELETE</span>
           </button>
         </div>  
-        <button class="logout-btn">
+        <button class="logout-btn" onclick="handleCalendar()">
           <img
           class="sidebar-icon"
-          src="{{ url_for('static',filename='images/logout.svg') }}"
+          src="{{ url_for('static',filename='images/calendar.svg') }}"
           />
-          <span>Log Out</span>
+          <span>Calendar</span>
         </button>
       </div>
       
       <div class="event-form">
-        <h2>Create Event</h2>
+        <h2>Delete Event</h2>
         <label for="event-name">Event Name</label>
-        <select id="event-name" name="event-name"></select>
+        <select id="event-name" name="event-name">
+          <option></option>
+        </select>
     
         <button onclick="handleDeleteEvent()" type="submit" class="create-event">Delete Event</button>
       </div>      

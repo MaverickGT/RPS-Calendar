@@ -203,4 +203,22 @@ def get_user_from_database(admin_username):
     except Error as e:
         print(f"Error: {e}")
     return None
+
+def get_name_from_database(id):
+    """Gets an item from the database by its id."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("SELECT name FROM event_calendar.Event WHERE id = %s", (id,))
+            name = cursor.fetchone()[0]
+            return name
+    except Error as e:
+        print(f"Error: {e}")
+    return None
         
