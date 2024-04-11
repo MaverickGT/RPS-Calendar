@@ -66,6 +66,7 @@ def get_items_from_database():
             data = [dict(zip(columns, row)) for row in cursor.fetchall()]
             cursor.close()
             connection.close()
+            print(data)
             return data
     except Error as e:
         print(f"Error: {e}")
@@ -83,10 +84,9 @@ def get_item_from_database(id):
         if connection.is_connected():
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM event_calendar.Event WHERE id = %s", (id,))
-            row = cursor.fetchone()
-            cursor.close()
-            connection.close()
-            return row
+            columns = [column[0] for column in cursor.description]
+            data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            return data[0]
     except Error as e:
         print(f"Error: {e}")
     return None
