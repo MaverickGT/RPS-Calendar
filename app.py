@@ -11,6 +11,7 @@ app = Flask(__name__)
 CORS(app)
 app.config['JWT_SECRET_KEY'] =  os.urandom(64)
 jwt = JWTManager(app)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
 
 #Gmail wont work- you need to enable less secure apps in your google account
 app.config['MAIL_SERVER']='smtp-mail.outlook.com'
