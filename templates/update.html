@@ -33,35 +33,35 @@
           </div>
           <button class="sidebar-option" onclick="handleCreate()">
             <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/create.svg') }}"
+              class="sidebar-icon"
+              src="{{ url_for('static',filename='images/create.svg') }}"
             />
             <span>CREATE</span>
           </button>
-          <button class="sidebar-option">
+          <button class="sidebar-option selected">
             <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/update.svg') }}"
+              class="sidebar-icon"
+              src="{{ url_for('static',filename='images/update.svg') }}"
             />
             <span>UPDATE</span>
           </button>
           <button class="sidebar-option" onclick="handleDelete()">
             <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/delete.svg') }}"
+              class="sidebar-icon"
+              src="{{ url_for('static',filename='images/delete.svg') }}"
             />
             <span>DELETE</span>
           </button>
-        </div>  
+        </div>
         <button class="logout-btn" onclick="handleCalendar()">
           <img
-          class="sidebar-icon"
-          src="{{ url_for('static',filename='images/calendar.svg') }}"
+            class="sidebar-icon"
+            src="{{ url_for('static',filename='images/calendar.svg') }}"
           />
           <span>Calendar</span>
         </button>
       </div>
-      
+
       <form class="event-form">
         <h2>Update Event</h2>
         <label for="event-name">Event Name</label>
@@ -79,7 +79,12 @@
           </div>
           <div class="input-container">
             <label for="start-time">Start Time</label>
-            <input type="time" id="start-time" name="start-time" value="00:00" />
+            <input
+              type="time"
+              id="start-time"
+              name="start-time"
+              value="00:00"
+            />
           </div>
           <div class="input-container">
             <label for="end-time">End Time</label>
@@ -93,10 +98,10 @@
           name="event-location"
           placeholder="Paste location link from Google Maps here"
         />
-    
+
         <label for="event-description">Event Description</label>
         <textarea id="event-description" name="event-description"></textarea>
-    
+
         <div class="event-organizer">
           <div class="input-container">
             <label for="event-type">Select Event Type</label>
@@ -112,10 +117,15 @@
             <input type="file" id="image-upload" name="image-upload" />
           </div>
         </div>
-    
-        <button type="submit" class="create-event" onclick="handleUpdateEvent()">Update Event</button>
+
+        <button
+          type="submit"
+          class="create-event"
+          onclick="handleUpdateEvent()"
+        >
+          Update Event
+        </button>
       </form>
-    </div>    
+    </div>
   </body>
-  
 </html>
