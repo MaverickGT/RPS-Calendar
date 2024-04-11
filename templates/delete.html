@@ -34,45 +34,50 @@
           </div>
           <button class="sidebar-option" onclick="handleCreate()">
             <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/create.svg') }}"
+              class="sidebar-icon"
+              src="{{ url_for('static',filename='images/create.svg') }}"
             />
             <span>CREATE</span>
           </button>
           <button class="sidebar-option" onclick="handleUpdate()">
             <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/update.svg') }}"
+              class="sidebar-icon"
+              src="{{ url_for('static',filename='images/update.svg') }}"
             />
             <span>UPDATE</span>
           </button>
-          <button class="sidebar-option">
+          <button class="sidebar-option selected">
             <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/delete.svg') }}"
+              class="sidebar-icon"
+              src="{{ url_for('static',filename='images/delete.svg') }}"
             />
             <span>DELETE</span>
           </button>
-        </div>  
+        </div>
         <button class="logout-btn" onclick="handleCalendar()">
           <img
-          class="sidebar-icon"
-          src="{{ url_for('static',filename='images/calendar.svg') }}"
+            class="sidebar-icon"
+            src="{{ url_for('static',filename='images/calendar.svg') }}"
           />
           <span>Calendar</span>
         </button>
       </div>
-      
+
       <div class="event-form">
         <h2>Delete Event</h2>
         <label for="event-name">Event Name</label>
         <select id="event-name" name="event-name">
           <option></option>
         </select>
-    
-        <button onclick="handleDeleteEvent()" type="submit" class="create-event">Delete Event</button>
-      </div>      
-    </div>    
+
+        <button
+          onclick="handleDeleteEvent()"
+          type="submit"
+          class="create-event"
+        >
+          Delete Event
+        </button>
+      </div>
+    </div>
   </body>
-  
 </html>
