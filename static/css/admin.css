@@ -28,13 +28,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #7630ea;
-  box-shadow: 5px 0 10px -5px;
+  background-color: white;
   padding: 20px 0;
+  color: black;
 }
 
 .sidebar {
-  width: 350px;
+  width: 250px;
 }
 
 .sidebar-title {
@@ -44,11 +44,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: #f7f7f7;
+  color: black;
 }
 
 .sidebar-option {
-  color: #f7f7f7;
+  color: black;
   margin-top: 10px;
   font-size: 20px;
   padding: 10px;
@@ -68,11 +68,11 @@ body {
 }
 
 .sidebar-option:hover {
-  background-color: #6633bc;
+  background-color: #f7f7f7;
 }
 
 .selected {
-  background-color: #6633bc;
+  background-color: #f7f7f7;
 }
 
 .logout-btn {
@@ -82,14 +82,14 @@ body {
   gap: 8px;
   align-items: center;
   justify-content: flex-start;
-  color: #f7f7f7;
+  color: black;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
 .logout-btn:hover {
-  background-color: #6633bc;
+  background-color: #f7f7f7;
 }
 
 .event-form {
