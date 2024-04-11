@@ -12,8 +12,8 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='css/main.css') }}"
     />
-    <script src="{{ url_for('static',filename='js/create.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/update.js') }}"></script>
+
+    <script src="{{ url_for('static',filename='js/delete.js') }}"></script>
   </head>
   <body>
     <header class="header admin-header">
@@ -63,78 +63,13 @@
         </button>
       </div>
       
-      <form class="event-form">
+      <div class="event-form">
         <h2>Create Event</h2>
         <label for="event-name">Event Name</label>
         <select id="event-name" name="event-name"></select>
     
-        <button type="submit" class="create-event">Delete Event</button>
-      </form>
-
-      <!-- <script>
-        // Fetch data from the API endpoint
-        fetch('/api/items')
-          .then(response => response.json())
-          .then(data => {
-            const eventNameDropdown = document.getElementById('event-name');
-            
-            // Populate the dropdown menu with options
-            data.forEach(event => {
-              const option = document.createElement('option');
-              option.value = event.name;
-              option.textContent = event.name;
-              eventNameDropdown.appendChild(option);
-            });
-          })
-          .catch(error => console.error('Error fetching data:', error));
-      </script> -->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const eventNameDropdown = document.getElementById('event-name');
-      
-          // Populate the dropdown menu with options
-          fetch('/api/items')
-            .then(response => response.json())
-            .then(data => {
-              data.forEach(event => {
-                const option = document.createElement('option');
-                option.value = event.id; // Store event ID as value
-                option.textContent = event.name;
-                eventNameDropdown.appendChild(option);
-              });
-            })
-            .catch(error => console.error('Error fetching data:', error));
-      
-          // Add event listener to handle deletion
-          document.querySelector('.event-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-            
-            // Get the selected event ID
-            const selectedEventId = eventNameDropdown.value;
-            const eventId = option.value;
-            console.log(eventId)
-            console.log(selectedEventId)
-      
-            // Make a request to delete the event
-            fetch(`/api/admin/delete/${eventId}`, {
-              method: 'DELETE'
-            })
-            .then(response => {
-              if (response.ok) {
-                // Event successfully deleted
-                console.log('Event deleted successfully');
-                // Optionally, you can remove the option from the dropdown menu
-                eventNameDropdown.remove(eventNameDropdown.selectedIndex);
-              } else {
-                // Error occurred while deleting event
-                console.error('Failed to delete event');
-              }
-            })
-            .catch(error => console.error('Error deleting event:', error));
-          });
-        });
-      </script>
-      
+        <button onclick="handleDeleteEvent()" type="submit" class="create-event">Delete Event</button>
+      </div>      
     </div>    
   </body>
   

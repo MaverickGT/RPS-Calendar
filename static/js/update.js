@@ -1,5 +1,13 @@
+const handleDelete = () => {
+    location.href = "http://localhost:8081/api/admin/delete"
+}
+
 const handleUpdate = () => {
     location.href = "http://localhost:8081/api/admin/update"
+}
+
+const handleCreate = () => {
+    location.href = "http://localhost:8081/api/admin/create"
 }
 
 const handleFetchEvents = () => {
