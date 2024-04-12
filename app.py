@@ -7,6 +7,7 @@ import os
 from model import Create_Event
 from manager import check_username_and_password
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity # type: ignore
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +15,10 @@ app.config['JWT_SECRET_KEY'] =  os.urandom(64)
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(days=36500)
 app.config['JWT_REFRESH_TOKEN_EXPIRES'] = datetime.timedelta(days=36500)
 jwt = JWTManager(app)
+
+app.config['UPLOAD_FOLDER'] = 'static/images'  # Specify your directory path
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024   # Optional: 16MB upload limit
+ALLOWED_EXTENSIONS = {'webp', 'png', 'jpg', 'jpeg', 'gif'}
 
 #Gmail wont work- you need to enable less secure apps in your google account
 app.config['MAIL_SERVER']='smtp-mail.outlook.com'
@@ -24,10 +29,23 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
+
+@app.route('/api/upload', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.root_path ,app.config['UPLOAD_FOLDER'], filename))
+        return 'File successfully uploaded'
+    else:
+        return 'File type not allowed'
 
 @app.route('/api/admin/login', methods=['GET','POST'])
 def admin_login():
