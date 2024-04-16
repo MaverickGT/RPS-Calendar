@@ -5,3 +5,4 @@ Flask-Mail
 Flask-JWT-Extended
 datetime
 werktzeug
+gunicorn
