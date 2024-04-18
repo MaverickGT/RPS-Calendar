@@ -72,7 +72,7 @@ def get_items_from_database():
             data = [dict(zip(columns, row)) for row in cursor.fetchall()]
             cursor.close()
             connection.close()
-            print(data)
+            # print(data)
             return data
     except Error as e:
         print(f"Error: {e}")
