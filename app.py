@@ -8,6 +8,9 @@ from model import Create_Event
 from manager import check_username_and_password
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity # type: ignore
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -21,10 +24,10 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024   # Optional: 16MB upload li
 ALLOWED_EXTENSIONS = {'webp', 'png', 'jpg', 'jpeg', 'gif'}
 
 #Gmail wont work- you need to enable less secure apps in your google account
-app.config['MAIL_SERVER']='smtp-mail.outlook.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USERNAME'] = 'hpecalendar@outlook.com'
-app.config['MAIL_PASSWORD'] = 'adminadmin12'
+app.config['MAIL_SERVER']= os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)

@@ -2,11 +2,14 @@ import mysql.connector # type: ignore
 from mysql.connector import Error # type: ignore
 from model import Create_Event, Event
 import json
+import os
+from dotenv import load_dotenv
 
-host_name='78.128.76.186'
-database_name='event_calendar'
-username='alex'
-password_DB='SwyQcGYvKEXubkjXfCJEMLnRB'
+load_dotenv()
+host_name=os.getenv('DB_HOST')
+database_name=os.getenv('DB_NAME')
+username=os.getenv('DB_USER')
+password_DB=os.getenv('DB_PASSWORD')
 
 def connect_to_mariadb():
     """Connects to a MariaDB database and prints the database version."""
