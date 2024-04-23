@@ -1,18 +1,18 @@
 const handleDelete = () => {
-  location.href = "http://localhost:8081/api/admin/delete";
+  location.href = "http://127.0.0.1:8081/api/admin/delete";
 };
 
 const handleUpdate = () => {
-  location.href = "http://localhost:8081/api/admin/update";
+  location.href = "http://127.0.0.1:8081/api/admin/update";
 };
 
 const handleCreate = () => {
-  location.href = "http://localhost:8081/api/admin/create";
+  location.href = "http://127.0.0.1:8081/api/admin/create";
 };
 
 const handleCalendar = () => {
   localStorage.removeItem("hpe-jtw");
-  location.href = "http://localhost:8081/";
+  location.href = "http://10.206.140.28/";
 };
 
 const handleSubmitEvent = () => {
@@ -58,7 +58,7 @@ const handleSubmitEvent = () => {
     picture: file.name,
   };
 
-  fetch("http://localhost:8081/api/admin/add", {
+  fetch("http://127.0.0.1:8081/api/admin/add", {
     method: "POST",
     body: JSON.stringify(body),
     headers: {

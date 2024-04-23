@@ -19,7 +19,7 @@ function clearFeedback() {
 function submitFeedback() {
   var data = getValue();
   console.log(data);
-  fetch("http://localhost:8081/api/feedback", {
+  fetch("http://127.0.0.1:8081/api/feedback", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +35,7 @@ function submitFeedback() {
 
 async function getEvents() {
   var return_data = [];
-  await fetch("http://localhost:8081/api/items")
+  await fetch("http://127.0.0.1:8081/api/items")
     .then((res) => res.json())
     .then((data) => {
       return_data = data;
