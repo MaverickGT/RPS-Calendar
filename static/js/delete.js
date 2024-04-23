@@ -1,13 +1,13 @@
 const handleDelete = () => {
-  location.href = "http://127.0.0.1:8081/api/admin/delete";
+  location.href = "http://10.206.140.28/api/admin/delete";
 };
 
 const handleUpdate = () => {
-  location.href = "http://127.0.0.1:8081/api/admin/update";
+  location.href = "http://10.206.140.28/api/admin/update";
 };
 
 const handleCreate = () => {
-  location.href = "http://127.0.0.1:8081/api/admin/create";
+  location.href = "http://10.206.140.28/api/admin/create";
 };
 
 const handleCalendar = () => {
