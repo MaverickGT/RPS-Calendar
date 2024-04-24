@@ -7,3 +7,4 @@ datetime
 werktzeug
 gunicorn
 python-dotenv
+PySocks
