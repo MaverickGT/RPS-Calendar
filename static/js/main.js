@@ -19,7 +19,7 @@ function clearFeedback() {
 function submitFeedback() {
   var data = getValue();
   console.log(data);
-  fetch("http://eventia.eu.hpecorp.net/api/feedback", {
+  fetch("https://eventia.eu.hpecorp.net/api/feedback", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +35,7 @@ function submitFeedback() {
 
 async function getEvents() {
   var return_data = [];
-  await fetch("http://eventia.eu.hpecorp.net/api/items")
+  await fetch("https://eventia.eu.hpecorp.net/api/items")
     .then((res) => res.json())
     .then((data) => {
       return_data = data;

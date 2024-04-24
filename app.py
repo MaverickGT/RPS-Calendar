@@ -9,7 +9,6 @@ from manager import check_username_and_password
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity # type: ignore
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
-import socks
 
 load_dotenv()
 
@@ -24,10 +23,6 @@ app.config['UPLOAD_FOLDER'] = 'static/images'  # Specify your directory path
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024   # Optional: 16MB upload limit
 ALLOWED_EXTENSIONS = {'webp', 'png', 'jpg', 'jpeg', 'gif'}
 
-# Proxy settings
-proxy_host = os.getenv('PROXY_HOST')
-proxy_port = os.getenv('PROXY_PORT')
-
 
 #Gmail wont work- you need to enable less secure apps in your google account
 app.config['MAIL_SERVER']= os.getenv('MAIL_SERVER')
@@ -38,8 +33,6 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 
-socks.setdefaultproxy(socks.HTTP, proxy_host, proxy_port)
-socks.wrapmodule(mail)
 
 def allowed_file(filename):
     return '.' in filename and \
