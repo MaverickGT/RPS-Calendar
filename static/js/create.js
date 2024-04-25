@@ -30,7 +30,7 @@ const handleSubmitEvent = () => {
   if (file) {
     const formData = new FormData();
     formData.append("file", file);
-    fetch("/api/upload", {
+    fetch(`${BASE_URL}/api/upload`, {
       method: "POST",
       body: formData,
     })
@@ -58,7 +58,7 @@ const handleSubmitEvent = () => {
     picture: file.name,
   };
 
-  fetch("https://eventia.eu.hpecorp.net/api/admin/add", {
+  fetch(`${BASE_URL}/api/admin/add`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: {

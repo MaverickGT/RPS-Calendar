@@ -97,6 +97,12 @@ async function loadCalendar() {
           closeModal(modal);
         });
       });
+      document.querySelector("#overlay").addEventListener("click", () => {
+        const modals = document.querySelectorAll(".modal.active");
+        modals.forEach((modal) => {
+          closeModal(modal);
+        });
+      });
     },
   });
   calendar.render();
