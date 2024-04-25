@@ -1,3 +1,31 @@
+async function addEvent(file, body) {
+  if (file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    fetch("localhost:8081/api/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.text())
+      .then((text) => {
+        console.log("Success:", text);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  } else {
+    console.log("No image has been uploaded!");
+  }
+  fetch("localhost:8081/api/admin/add", {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => console.log(res));
+}
+
 const handleDelete = () => {
   location.href = `${BASE_URL}/api/admin/delete`;
 };
@@ -27,23 +55,6 @@ const handleSubmitEvent = () => {
   const jwtToken = localStorage.getItem("hpe-jtw");
   const eventImage = document.getElementById("image-upload");
   const file = eventImage.files[0];
-  if (file) {
-    const formData = new FormData();
-    formData.append("file", file);
-    fetch("localhost:8081/api/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.text())
-      .then((text) => {
-        console.log("Success:", text);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  } else {
-    console.log("No image has been uploaded!");
-  }
   const body = {
     name: eventName,
     start_date: startDate,
@@ -57,13 +68,5 @@ const handleSubmitEvent = () => {
     location: eventLocation,
     picture: file.name,
   };
-
-  fetch("localhost:8081/api/admin/add", {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      "Content-Type": "application/json",
-    },
-  }).then((res) => console.log(res));
+  addEvent(file, body);
 };
