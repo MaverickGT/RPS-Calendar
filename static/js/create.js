@@ -1,8 +1,19 @@
-async function addEvent(file, body) {
+async function addEvent(body) {
+  await fetch("localhost:8081/api/admin/add", {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => console.log(res));
+}
+
+async function uploadImage(file) {
   if (file) {
     const formData = new FormData();
     formData.append("file", file);
-    fetch("localhost:8081/api/upload", {
+    await fetch("localhost:8081/api/upload", {
       method: "POST",
       body: formData,
     })
@@ -16,14 +27,6 @@ async function addEvent(file, body) {
   } else {
     console.log("No image has been uploaded!");
   }
-  fetch("localhost:8081/api/admin/add", {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      "Content-Type": "application/json",
-    },
-  }).then((res) => console.log(res));
 }
 
 const handleDelete = () => {
@@ -68,5 +71,6 @@ const handleSubmitEvent = () => {
     location: eventLocation,
     picture: file.name,
   };
-  addEvent(file, body);
+  addEvent(body);
+  uploadImage(file);
 };
