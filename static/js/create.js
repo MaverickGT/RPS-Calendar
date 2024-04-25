@@ -46,7 +46,8 @@ const handleCalendar = () => {
   location.href = `${BASE_URL}/`;
 };
 
-const handleSubmitEvent = async () => {
+async function handleSubmitEvent(e) {
+  e.preventDefault();
   const eventLocation = document.getElementById("event-location").value;
   console.log(eventLocation);
   const eventDescription = document.getElementById("event-description").value;
@@ -85,4 +86,4 @@ const handleSubmitEvent = async () => {
   console.log("after ADD event");
   await uploadImage(file);
   console.log("after upload image");
-};
+}
