@@ -30,7 +30,7 @@ const handleSubmitEvent = () => {
   if (file) {
     const formData = new FormData();
     formData.append("file", file);
-    fetch(`${BASE_URL}/api/upload`, {
+    fetch("localhost:8081/api/upload", {
       method: "POST",
       body: formData,
     })
@@ -58,7 +58,7 @@ const handleSubmitEvent = () => {
     picture: file.name,
   };
 
-  fetch(`${BASE_URL}/api/admin/add`, {
+  fetch("localhost:8081/api/admin/add", {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
