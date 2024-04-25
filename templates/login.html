@@ -10,7 +10,8 @@
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
           rel="stylesheet"
         /> -->
-        <script src="{{ url_for('static',filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/config.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/login.js') }}"></script>
   </head>
   <body>
     <div class="login-box">
@@ -20,7 +21,12 @@
         <input id="username" type="username" placeholder="" />
         <label>Password</label>
         <input id="password" type="password" placeholder="" />
-        <input id="submit-btn" onclick="handleSubmit()" type="button" value="Login" />
+        <input
+          id="submit-btn"
+          onclick="handleSubmit()"
+          type="button"
+          value="Login"
+        />
       </form>
     </div>
   </body>

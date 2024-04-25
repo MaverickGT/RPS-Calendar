@@ -1,18 +1,18 @@
 const handleDelete = () => {
-  location.href = "https://eventia.eu.hpecorp.net/api/admin/delete";
+  location.href = `${BASE_URL}/api/admin/delete`;
 };
 
 const handleUpdate = () => {
-  location.href = "https://eventia.eu.hpecorp.net/api/admin/update";
+  location.href = `${BASE_URL}/api/admin/update`;
 };
 
 const handleCreate = () => {
-  location.href = "https://eventia.eu.hpecorp.net/api/admin/create";
+  location.href = `${BASE_URL}/api/admin/create`;
 };
 
 const handleCalendar = () => {
   localStorage.removeItem("hpe-jtw");
-  location.href = "https://eventia.eu.hpecorp.net/";
+  location.href = `${BASE_URL}/`;
 };
 
 const handleFetchEvents = () => {

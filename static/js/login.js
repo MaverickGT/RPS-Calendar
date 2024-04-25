@@ -2,7 +2,7 @@ const handleSubmit = () => {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  fetch("https://eventia.eu.hpecorp.net/api/admin/login", {
+  fetch(`${BASE_URL}/api/admin/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +15,7 @@ const handleSubmit = () => {
         alert("Failed to login: " + data.message);
       } else {
         localStorage.setItem("hpe-jtw", data.access_token);
-        location.href = "https://eventia.eu.hpecorp.net/api/admin/create";
+        location.href = `${BASE_URL}/api/admin/create`;
       }
     });
 };
