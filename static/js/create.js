@@ -48,16 +48,25 @@ const handleCalendar = () => {
 
 const handleSubmitEvent = async () => {
   const eventLocation = document.getElementById("event-location").value;
+  console.log(eventLocation);
   const eventDescription = document.getElementById("event-description").value;
+  console.log(eventDescription);
   const startTime = document.getElementById("start-time").value;
+  console.log(startTime);
   const endTime = document.getElementById("end-time").value;
+  console.log(endTime);
   const startDate = document.getElementById("start-date").value;
+  console.log(startDate);
   const endDate = document.getElementById("end-date").value;
+  console.log(endDate);
   const eventName = document.getElementById("event-name").value;
+  console.log(eventName);
   const eventType = document.getElementById("event-type").value;
+  console.log(eventType);
   const jwtToken = localStorage.getItem("hpe-jtw");
   const eventImage = document.getElementById("image-upload");
   const file = eventImage.files[0];
+  console.log(file.name);
   const body = {
     name: eventName,
     start_date: startDate,
@@ -71,6 +80,9 @@ const handleSubmitEvent = async () => {
     location: eventLocation,
     picture: file.name,
   };
+  console.log(body);
   await addEvent(body);
+  console.log("after ADD event");
   await uploadImage(file);
+  console.log("after upload image");
 };
