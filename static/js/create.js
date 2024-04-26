@@ -49,7 +49,7 @@ const handleSubmitEvent = () => {
     picture: "",
   };
 
-  fetch("http://localhost:8081/api/admin/add", {
+  fetch(`${BASE_URL}/api/admin/add`, {
     method: "PUT",
     body: JSON.stringify(body),
     headers: {
