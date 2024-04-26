@@ -122,7 +122,7 @@ def add_item():
     return jsonify({'message': 'Item not added'}), 400
 
 @app.route('/api/admin/update/<int:id>', methods=['PUT'])
-@jwt_required()
+#@jwt_required()
 def update_item(id):
     event=get_item(id)
     data = request.get_json()
