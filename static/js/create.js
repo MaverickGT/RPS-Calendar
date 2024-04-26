@@ -1,34 +1,3 @@
-async function addEvent(body) {
-  await fetch("localhost:8081/api/admin/add", {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: {
-      Authorization: `Bearer ${jwtToken}`,
-      "Content-Type": "application/json",
-    },
-  }).then((res) => console.log(res));
-}
-
-async function uploadImage(file) {
-  if (file) {
-    const formData = new FormData();
-    formData.append("file", file);
-    await fetch("localhost:8081/api/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.text())
-      .then((text) => {
-        console.log("Success:", text);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  } else {
-    console.log("No image has been uploaded!");
-  }
-}
-
 const handleDelete = () => {
   location.href = `${BASE_URL}/api/admin/delete`;
 };
@@ -46,8 +15,7 @@ const handleCalendar = () => {
   location.href = `${BASE_URL}/`;
 };
 
-async function handleSubmitEvent(e) {
-  e.preventDefault();
+const handleSubmitEvent = () => {
   const eventLocation = document.getElementById("event-location").value;
   console.log(eventLocation);
   const eventDescription = document.getElementById("event-description").value;
@@ -65,9 +33,8 @@ async function handleSubmitEvent(e) {
   const eventType = document.getElementById("event-type").value;
   console.log(eventType);
   const jwtToken = localStorage.getItem("hpe-jtw");
-  const eventImage = document.getElementById("image-upload");
-  const file = eventImage.files[0];
-  console.log(file.name);
+  //const eventImage = document.getElementById("image-upload");
+
   const body = {
     name: eventName,
     start_date: startDate,
@@ -79,11 +46,16 @@ async function handleSubmitEvent(e) {
     end_time: endTime,
     all_day: false,
     location: eventLocation,
-    picture: file.name,
+    picture: "",
   };
-  console.log(body);
-  await addEvent(body);
+  console.log(body.picture);
+  fetch("http://localhost:8081/api/admin/add", {
+    method: "PUT",
+    body: JSON.stringify(body),
+    headers: {
+      Authorization: `Bearer ${jwtToken}`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => console.log(res));
   console.log("after ADD event");
-  await uploadImage(file);
-  console.log("after upload image");
-}
+};

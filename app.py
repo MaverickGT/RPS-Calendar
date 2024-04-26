@@ -42,7 +42,7 @@ def allowed_file(filename):
 def home():
     return render_template('index.html')
 
-@app.route('/api/upload', methods=['POST'])
+@app.route('/api/upload', methods=['PUT'])
 def upload_file():
     file = request.files['file']
     if file and allowed_file(file.filename):
@@ -97,7 +97,7 @@ def get_item(id):
         return jsonify(item)
     return jsonify({'message': 'Item not found'}), 404
 
-@app.route('/api/admin/add', methods=['POST'])
+@app.route('/api/admin/add', methods=['PUT'])
 #@jwt_required() 
 def add_item():
     data = request.get_json()
@@ -179,4 +179,4 @@ def get_legend():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8081)
+    app.run(debug=True, host='127.0.0.1', port=8081)
