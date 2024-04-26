@@ -80,6 +80,10 @@ def update_page():
 def delete_page():
     return render_template('delete.html')
 
+@app.route('/api/admin/feedback', methods=['GET'])
+def feedback_page():
+    return render_template('feedback.html')
+
 @app.route('/api/items', methods=['GET'])
 def get_items():
     items = database.get_items_from_database()
@@ -164,17 +168,47 @@ def send_feedback():
     if not '@hpe.com' in customer_email:
         return jsonify({'message': 'You need you use your HPE email'}), 400
     
-    # Our mailbox send the feedback to herself
-    msg = Message('New Feedback', sender="hpecalendar@outlook.com", recipients=["hpecalendar@outlook.com"])
-    msg.body = f"Name: {customer_name}\nEmail: {customer_email}\nFeedback: {feedback}"
-    mail.send(msg)
+    # # Our mailbox send the feedback to herself
+    # msg = Message('New Feedback', sender="hpecalendar@outlook.com", recipients=["hpecalendar@outlook.com"])
+    # msg.body = f"Name: {customer_name}\nEmail: {customer_email}\nFeedback: {feedback}"
+    # mail.send(msg)
+    
+    if database.add_feedback_to_database(customer_name, customer_email, feedback):
+        return jsonify({'message': 'Feedback sent'}), 200
+    
+    return jsonify({'message': 'Feedback -not sent'}), 401
 
-    return jsonify({'message': 'Feedback sent'}), 200
+@app.route('/api/feedback', methods=['GET'])
+def get_all_feedback():
+    feedback = database.get_feedback_items_from_database()
+    return jsonify(feedback)
+
+@app.route('/api/feedback/<int:id>', methods=['GET'])
+def get_feedback(id):
+    feedback = database.get_feedback_from_database(id)
+    if feedback:
+        return jsonify(feedback)
+    return jsonify({'message': 'Feedback not found'}), 404
+
+@app.route('/api/feedback', methods=['DELETE'])
+def delete_all_feedback():
+    if database.delete_all_feedback_from_database():
+        return jsonify({'message': 'All feedback deleted'}), 200
+    else:
+        return jsonify({'message': 'Feedback not deleted'}), 400
+
+@app.route('/api/feedback/<int:id>', methods=['DELETE'])
+def delete_feedback(id):
+    if database.delete_feedback_from_database_by_id(id):
+        return jsonify({'message': 'Feedback deleted'}), 200
+    else:
+        return jsonify({'message': 'Feedback not deleted'}), 400
 
 @app.route('/api/legend', methods=['GET'])
 def get_legend():
     legend = database.get_legend_from_DB()
     return jsonify(legend)
+
 
 
 

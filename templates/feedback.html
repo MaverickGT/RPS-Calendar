@@ -7,8 +7,9 @@
   <title>RPS Sofia Event Calendar - Admin Panel</title>
   <link rel="stylesheet" href="{{ url_for('static',filename='css/admin.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}" />
-  <script src="{{ url_for('static',filename='js/config.js') }}"></script>
-  <script src="{{ url_for('static',filename='js/delete.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/feedback.css') }}" />
+  <script defer src="{{ url_for('static',filename='js/config.js') }}"></script>
+  <script defer src="{{ url_for('static',filename='js/feedback.js') }}"></script>
 </head>
 
 <body>
@@ -25,7 +26,7 @@
         <div class="sidebar-title">
           <label>Event Options</label>
         </div>
-        <button class="sidebar-option selected">
+        <button class="sidebar-option selected" onclick="handleCreate()">
           <img class="sidebar-icon" src="{{ url_for('static',filename='images/create.svg') }}" />
           <span>CREATE</span>
         </button>
@@ -50,19 +51,18 @@
       </div>
     </div>
 
-
-
-    <div class="event-form">
-      <h2>Delete Event</h2>
-      <label for="event-name">Event Name</label>
-      <select id="event-name" name="event-name">
-        <option></option>
-      </select>
-
-      <button onclick="handleDeleteEvent()" type="submit" class="create-event">
-        Delete Event
+    <div class="main-container">
+      <button class="delete-all-btn" onclick="handleDeleteAllFeedback()">
+        <img class="sidebar-icon" src="{{ url_for('static',filename='images/delete-feedback.svg') }}" />
+        <span>Delete All</span>
       </button>
+      <div id="feedbacks-container" class="feedbacks-container">
+
+      </div>
     </div>
+
+
+
   </div>
 </body>
 

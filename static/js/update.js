@@ -10,6 +10,10 @@ const handleCreate = () => {
   location.href = `${BASE_URL}/api/admin/create`;
 };
 
+const handleFeedback = () => {
+  location.href = `${BASE_URL}/api/admin/feedback`;
+};
+
 const handleCalendar = () => {
   localStorage.removeItem("hpe-jtw");
   location.href = `${BASE_URL}/`;

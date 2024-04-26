@@ -213,7 +213,52 @@ def get_user_from_database(admin_username):
         print(f"Error: {e}")
     return None
 
-def get_name_from_database(id):
+def add_feedback_to_database(name, email, description):
+    """Adds feedback to the database."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("INSERT INTO event_calendar.Feedback (name, email, description) VALUES (%s, %s, %s)", (name, email, description))
+            connection.commit()
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
+    except Error as e:
+        print(f"Error: {e}")
+
+def get_feedback_items_from_database():
+    """Gets all items from the Feedback table."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM event_calendar.Feedback")
+            columns = [column[0] for column in cursor.description]
+            data = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            cursor.close()
+            connection.close()
+            return data
+    except Error as e:
+        print(f"Error: {e}")
+        return []
+
+def get_feedback_from_database(id):
     """Gets an item from the database by its id."""
     try:
         connection = mysql.connector.connect(
@@ -224,10 +269,59 @@ def get_name_from_database(id):
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            cursor.execute("SELECT name FROM event_calendar.Event WHERE id = %s", (id,))
+            cursor.execute("SELECT * FROM event_calendar.Event WHERE id = %s", (id,))
             name = cursor.fetchone()[0]
             return name
     except Error as e:
         print(f"Error: {e}")
     return None
         
+def delete_all_feedback_from_database():
+    """Deletes all items from the database."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            delete_query = """DELETE FROM event_calendar.Feedback"""
+            cursor.execute(delete_query)
+            connection.commit()
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
+    except Error as e:
+        print(f"Error: {e}")
+
+def delete_feedback_from_database_by_id(id):
+    """Deletes an item from the database by its id."""
+    try:
+        connection = mysql.connector.connect(
+            host=host_name,
+            database=database_name,
+            user=username,
+            password=password_DB
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            delete_query = """DELETE FROM event_calendar.Feedback WHERE id = %s"""
+            cursor.execute(delete_query, (id,))
+            connection.commit()
+            if cursor.rowcount > 0:
+                cursor.close()
+                connection.close()
+                return True
+            else:
+                cursor.close()
+                connection.close()
+                return False
+    except Error as e:
+        print(f"Error: {e}")
