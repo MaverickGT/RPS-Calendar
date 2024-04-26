@@ -48,7 +48,7 @@ const handleSubmitEvent = () => {
     location: eventLocation,
     picture: "",
   };
-  console.log(body.picture);
+
   fetch("http://localhost:8081/api/admin/add", {
     method: "PUT",
     body: JSON.stringify(body),
@@ -56,9 +56,7 @@ const handleSubmitEvent = () => {
       Authorization: `Bearer ${jwtToken}`,
       "Content-Type": "application/json",
     },
-  }).then((res) => console.log(res));
-  clearForm();
-  console.log("after ADD event");
+  }).then((res) => clearForm(), console.log("after ADD event"));
 };
 
 function clearForm() {
