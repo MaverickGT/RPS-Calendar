@@ -102,7 +102,7 @@ def get_item(id):
     return jsonify({'message': 'Item not found'}), 404
 
 @app.route('/api/admin/add', methods=['PUT'])
-#@jwt_required() 
+@jwt_required() 
 def add_item():
     data = request.get_json()
     name=data.get('name')

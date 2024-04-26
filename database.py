@@ -111,6 +111,12 @@ def update_item_in_database(id, event:Create_Event):
         )
         if connection.is_connected():
             cursor = connection.cursor()
+            if event.type == "QTO":
+                event.color = "#17eba0"
+            elif event.type == "ALT":
+                event.color = "#ffbc44"
+            elif event.type == "CHC":
+                event.color = "#00C8FF"
             cursor.execute("UPDATE event_calendar.Event SET name=%s,start_date=%s, end_date= %s, type= %s,color=%s, description= %s, picture= %s, start_time= %s, end_time= %s, all_day= %s , location=%s WHERE id = %s", (event.name,event.start_date,event.end_date, event.type, event.color,event.description, event.picture,event.start_time, event.end_time, event.all_day, event.location, id)) 
             connection.commit()
             if cursor.rowcount > 0:
