@@ -17,6 +17,7 @@ function clearFeedback() {
 }
 
 function submitFeedback() {
+  var successMsg = document.getElementById("success-msg");
   var data = getValue();
   console.log(data);
   fetch(`${BASE_URL}/api/feedback`, {
@@ -30,6 +31,10 @@ function submitFeedback() {
     .then((data) => {
       console.log(data);
       clearFeedback();
+      successMsg.classList.add("active");
+      setTimeout(() => {
+        successMsg.classList.remove("active");
+      }, 5000);
     });
 }
 

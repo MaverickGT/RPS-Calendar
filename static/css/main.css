@@ -498,3 +498,20 @@ a:hover {
 a:active {
   text-decoration: none;
 }
+
+.success-msg {
+  display: none;
+  align-items: center;
+  background-color: #17eba0;
+  font-size: 20px;
+  font-family: "MetricHPE-Regular";
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 150px;
+  padding-left: 15px;
+  border-radius: 25px;
+}
+
+.success-msg.active {
+  display: flex;
+}
