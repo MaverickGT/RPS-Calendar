@@ -126,7 +126,7 @@ def add_item():
 def update_item(id):
     event=get_item(id)
     data = request.get_json()
-    name=database.get_name_from_database(id)
+    name=database.get_item_from_database(id).get('name')
     start_date = data.get('start_date')
     end_date = data.get('end_date')
     type = data.get('type')
