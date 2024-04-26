@@ -287,7 +287,7 @@ def delete_all_feedback_from_database():
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            delete_query = """DELETE FROM event_calendar.Event"""
+            delete_query = """DELETE FROM event_calendar.Feedback"""
             cursor.execute(delete_query)
             connection.commit()
             if cursor.rowcount > 0:
@@ -312,7 +312,7 @@ def delete_feedback_from_database_by_id(id):
         )
         if connection.is_connected():
             cursor = connection.cursor()
-            delete_query = """DELETE FROM event_calendar.Event WHERE id = %s"""
+            delete_query = """DELETE FROM event_calendar.Feedback WHERE id = %s"""
             cursor.execute(delete_query, (id,))
             connection.commit()
             if cursor.rowcount > 0:

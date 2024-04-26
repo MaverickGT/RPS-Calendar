@@ -80,6 +80,10 @@ def update_page():
 def delete_page():
     return render_template('delete.html')
 
+@app.route('/api/admin/feedback', methods=['GET'])
+def feedback_page():
+    return render_template('feedback.html')
+
 @app.route('/api/items', methods=['GET'])
 def get_items():
     items = database.get_items_from_database()
@@ -168,10 +172,11 @@ def send_feedback():
     # msg = Message('New Feedback', sender="hpecalendar@outlook.com", recipients=["hpecalendar@outlook.com"])
     # msg.body = f"Name: {customer_name}\nEmail: {customer_email}\nFeedback: {feedback}"
     # mail.send(msg)
-
-    database.add_feedback_to_database(customer_name, customer_email, feedback)
-
-    return jsonify({'message': 'Feedback sent'}), 200
+    
+    if database.add_feedback_to_database(customer_name, customer_email, feedback):
+        return jsonify({'message': 'Feedback sent'}), 200
+    
+    return jsonify({'message': 'Feedback -not sent'}), 401
 
 @app.route('/api/feedback', methods=['GET'])
 def get_all_feedback():
@@ -185,7 +190,7 @@ def get_feedback(id):
         return jsonify(feedback)
     return jsonify({'message': 'Feedback not found'}), 404
 
-@app.route('/api/feedback/deleteall', methods=['DELETE'])
+@app.route('/api/feedback', methods=['DELETE'])
 def delete_all_feedback():
     if database.delete_all_feedback_from_database():
         return jsonify({'message': 'All feedback deleted'}), 200

@@ -33,41 +33,36 @@
     </header>
 
     <div class="container">
-      <div class="sidebar-container">
-        <div class="sidebar">
-          <div class="sidebar-title">
-            <label>Event Options</label>
+        <div class="sidebar-container">
+          <div class="sidebar">
+            <div class="sidebar-title">
+              <label>Event Options</label>
+            </div>
+            <button class="sidebar-option selected">
+              <img class="sidebar-icon" src="{{ url_for('static',filename='images/create.svg') }}" />
+              <span>CREATE</span>
+            </button>
+            <button class="sidebar-option" onclick="handleUpdate()">
+              <img class="sidebar-icon" src="{{ url_for('static',filename='images/update.svg') }}" />
+              <span>UPDATE</span>
+            </button>
+            <button class="sidebar-option" onclick="handleDelete()">
+              <img class="sidebar-icon" src="{{ url_for('static',filename='images/delete.svg') }}" />
+              <span>DELETE</span>
+            </button>
           </div>
-          <button class="sidebar-option selected">
-            <img
-              class="sidebar-icon"
-              src="{{ url_for('static',filename='images/create.svg') }}"
-            />
-            <span>CREATE</span>
-          </button>
-          <button class="sidebar-option" onclick="handleUpdate()">
-            <img
-              class="sidebar-icon"
-              src="{{ url_for('static',filename='images/update.svg') }}"
-            />
-            <span>UPDATE</span>
-          </button>
-          <button class="sidebar-option" onclick="handleDelete()">
-            <img
-              class="sidebar-icon"
-              src="{{ url_for('static',filename='images/delete.svg') }}"
-            />
-            <span>DELETE</span>
-          </button>
+          <div class="sidebar">
+            <button class="sidebar-btn-lg" onclick="handleFeedback()">
+              <img class="sidebar-icon" src="{{ url_for('static',filename='images/feedback.svg') }}" />
+              <span>Feedback</span>
+            </button>
+            <button class="sidebar-btn-lg" onclick="handleCalendar()">
+              <img class="sidebar-icon" src="{{ url_for('static',filename='images/calendar.svg') }}" />
+              <span>Calendar</span>
+            </button>
+          </div>
         </div>
-        <button class="logout-btn" onclick="handleCalendar()">
-          <img
-            class="sidebar-icon"
-            src="{{ url_for('static',filename='images/calendar.svg') }}"
-          />
-          <span>Calendar</span>
-        </button>
-      </div>
+      
 
       <form onsubmit="handleSubmitEvent(e)" class="event-form" id="event-form">
         <h2>Create Event</h2>
