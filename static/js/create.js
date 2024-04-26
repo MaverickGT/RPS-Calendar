@@ -57,5 +57,16 @@ const handleSubmitEvent = () => {
       "Content-Type": "application/json",
     },
   }).then((res) => console.log(res));
+  clearForm();
   console.log("after ADD event");
 };
+
+function clearForm() {
+  document.getElementById("event-location").value = "";
+  document.getElementById("event-description").value = "";
+  document.getElementById("start-time").value = "";
+  document.getElementById("end-time").value = "";
+  document.getElementById("start-date").value = "";
+  document.getElementById("end-date").value = "";
+  document.getElementById("event-name").value = "";
+}
