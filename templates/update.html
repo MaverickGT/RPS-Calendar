@@ -32,14 +32,14 @@
           <div class="sidebar-title">
             <label>Event Options</label>
           </div>
-          <button class="sidebar-option">
+          <button class="sidebar-option" onclick="handleCreate()">
             <img
               class="sidebar-icon"
               src="{{ url_for('static',filename='images/create.svg') }}"
             />
             <span>CREATE EVENT</span>
           </button>
-          <button class="sidebar-option selected" onclick="handleUpdate()">
+          <button class="sidebar-option selected">
             <img
               class="sidebar-icon"
               src="{{ url_for('static',filename='images/update.svg') }}"
