@@ -1,6 +1,6 @@
 import mysql.connector # type: ignore
 from mysql.connector import Error # type: ignore
-from model import Create_Event, Event
+from model import Create_Event
 import json
 import os
 from dotenv import load_dotenv
@@ -45,7 +45,7 @@ def add_item_to_database(event: Create_Event):
                 event.color = "#FFBC44"
             elif event.type == "CHC":
                 event.color = "#00C8FF"
-            cursor.execute("INSERT INTO event_calendar.Event (name,start_date, end_date, type, color, description, picture,start_time, end_time, all_day, location) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (event.name,event.start_date,event.end_date, event.type, event.color,event.description, event.picture,event.start_time, event.end_time, event.all_day, event.location))
+            cursor.execute("INSERT INTO event_calendar.Event (name,start_date, end_date, type, color, description,start_time, end_time, all_day, location) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (event.name,event.start_date,event.end_date, event.type, event.color,event.description,event.start_time, event.end_time, event.all_day, event.location))
             connection.commit()
             if cursor.rowcount > 0:
                 cursor.close()
@@ -117,7 +117,7 @@ def update_item_in_database(id, event:Create_Event):
                 event.color = "#FFBC44"
             elif event.type == "CHC":
                 event.color = "#00C8FF"
-            cursor.execute("UPDATE event_calendar.Event SET name=%s,start_date=%s, end_date= %s, type= %s,color=%s, description= %s, picture= %s, start_time= %s, end_time= %s, all_day= %s , location=%s WHERE id = %s", (event.name,event.start_date,event.end_date, event.type, event.color,event.description, event.picture,event.start_time, event.end_time, event.all_day, event.location, id)) 
+            cursor.execute("UPDATE event_calendar.Event SET name=%s,start_date=%s, end_date= %s, type= %s,color=%s, description= %s, start_time= %s, end_time= %s, all_day= %s , location=%s WHERE id = %s", (event.name,event.start_date,event.end_date, event.type, event.color,event.description,event.start_time, event.end_time, event.all_day, event.location, id)) 
             connection.commit()
             if cursor.rowcount > 0:
                 cursor.close()

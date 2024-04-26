@@ -1,12 +1,12 @@
 class Create_Event:
-    def __init__(self, name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day,location):
+    def __init__(self, name,start_date, end_date, type, color, description, start_time, end_time, all_day,location):
         self.name = name
         self.start_date = start_date
         self.end_date = end_date
         self.type = type
         self.color = color
         self.description = description
-        self.picture = picture
+        #self.picture = picture
         self.start_time = start_time
         self.end_time = end_time
         self.all_day = all_day
