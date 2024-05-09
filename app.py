@@ -102,7 +102,7 @@ def get_item(id):
     return jsonify({'message': 'Item not found'}), 404
 
 @app.route('/api/admin/add', methods=['PUT'])
-@jwt_required() 
+#@jwt_required() 
 def add_item():
     data = request.get_json()
     name=data.get('name')
@@ -145,7 +145,7 @@ def update_item(id):
 
 
 @app.route('/api/admin/delete/<int:id>', methods=['DELETE'])
-@jwt_required()
+#@jwt_required()
 def delete_item(id):
     if database.delete_item_from_database(id):
         return jsonify({'message': 'Item deleted'}), 200
