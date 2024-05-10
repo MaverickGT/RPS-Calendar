@@ -111,12 +111,12 @@ def add_item():
     type = data.get('type')
     color = data.get('color')
     description = data.get('description')
-    picture = data.get('picture')
+    #picture = data.get('picture')
     start_time = data.get('start_time')
     end_time = data.get('end_time')
     all_day = data.get('all_day')
     location=data.get('location')
-    event = Create_Event(name,start_date, end_date, type, color, description, picture, start_time, end_time, all_day,location)
+    event = Create_Event(name,start_date, end_date, type, color, description, start_time, end_time, all_day,location)
     if database.add_item_to_database(event):
         return jsonify({'message': 'Item added'}), 201
     return jsonify({'message': 'Item not added'}), 400
