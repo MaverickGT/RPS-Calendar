@@ -3,12 +3,13 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static',filename='css/calendar.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}" />
   <script src="{{ url_for('static',filename='js/config.js') }}"></script>
   <script src="{{ url_for('static',filename='js/calendar.js') }}"></script>
   <script src="{{ url_for('static',filename='js/main.js') }}"></script>
-  <title>RPS Sofia Event Calendar</title>
+  <title>PS GCC Sofia Event Calendar</title>
   <link rel="icon" type="image/x-icon" href="{{ url_for('static',filename='images/rps_icon.png') }}">
 </head>
 
@@ -20,7 +21,7 @@
       <div class="logo">
         <img class="logo_image" src="{{ url_for('static',filename='images/logo.svg') }}" />
       </div>
-      <div class="title">RPS SOFIA EVENT CALENDAR</div>
+      <div class="title">PS GCC SOFIA EVENT CALENDAR</div>
       <div class="header-btn-wrapper">
         <button class="header-btn" onclick="location.href='#contact_us'">Contact Us</button>
       </div>
@@ -96,8 +97,8 @@
       <div class="success-msg" id="success-msg">Message successfuly sent. Thank you for your feedback.</div>
       <button class="send-btn" onclick="submitFeedback();">Submit</button>
     <footer class="footer">
-      <div class="footer-title">RPS SOFIA EVENT CALENDAR</div>
-      <div class="footer-section">© 2024 Property of RPS Sofia Hub</div>
+      <div class="footer-title">PS GCC SOFIA EVENT CALENDAR</div>
+      <div class="footer-section">© 2024 Property of PS GCC Sofia Hub</div>
     </footer>
   </div>
 </body>
